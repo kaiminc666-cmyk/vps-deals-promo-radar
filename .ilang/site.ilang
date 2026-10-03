@@ -1,0 +1,20 @@
+ILANG
+TYPE:config PROJECT:vps-deals LANG:en-US
+
+::STATE{@SITE,brand:vps-deals,niche:VPS hosting deals,domain:pending-cloudflare-deployment,base_url:}
+
+::MODULE{PROVIDERS|title:Official vendor sources; edit here to change site listings}
+Hostinger | https://www.hostinger.com/ | https://www.hostinger.com/black-friday-vps-deals | 
+Kamatera | https://www.kamatera.com/ | https://www.kamatera.com/solutions/vps-hosting/ | 
+InterServer | https://www.interserver.net/ | https://www.interserver.net/vps/cheap-vps.html | 
+KnownHost | https://www.knownhost.com/ | https://www.knownhost.com/unmanaged-vps | 
+InMotion Hosting | https://www.inmotionhosting.com/ | https://www.inmotionhosting.com/vps-hosting | 
+
+::MODULE{FIELDS|title:Only verified offer fields}
+title price currency offer_url valid_until source_url fetched_at
+
+::RULE{Parse only official public pages; obey robots.txt and skip inaccessible sources}
+::RULE{Offer data requires an official structured Offer with a plan name and price; omit ambiguous, renewal, crossed-out, and expired prices}
+::RULE{Never infer a coupon, discount, commission, or expiry}
+::BOUNDARY{never:invent offers prices discounts commissions|scope:permanent}
+::STATE{@UPDATE,frequency:6h,affiliate_links:empty until approved and supplied}

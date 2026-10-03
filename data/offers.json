@@ -1,0 +1,104 @@
+{
+  "fetched_at": "2026-10-03T14:08:43Z",
+  "offers": [
+    {
+      "provider": "Hostinger",
+      "title": "KVM 1",
+      "price": "6.49",
+      "currency": "USD",
+      "offer_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "valid_until": "2027-10-02",
+      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "Hostinger",
+      "title": "KVM 2",
+      "price": "8.99",
+      "currency": "USD",
+      "offer_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "valid_until": "2027-10-02",
+      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "Hostinger",
+      "title": "KVM 4",
+      "price": "12.99",
+      "currency": "USD",
+      "offer_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "valid_until": "2027-10-02",
+      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "Hostinger",
+      "title": "KVM 8",
+      "price": "25.99",
+      "currency": "USD",
+      "offer_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "valid_until": "2027-10-02",
+      "source_url": "https://www.hostinger.com/black-friday-vps-deals",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "InMotion Hosting",
+      "title": "VPS 2 vCPU",
+      "price": "7.99",
+      "currency": "USD",
+      "offer_url": "https://www.inmotionhosting.com/vps-hosting",
+      "valid_until": "",
+      "source_url": "https://www.inmotionhosting.com/vps-hosting",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "InMotion Hosting",
+      "title": "VPS 4 vCPU",
+      "price": "9.99",
+      "currency": "USD",
+      "offer_url": "https://www.inmotionhosting.com/vps-hosting",
+      "valid_until": "",
+      "source_url": "https://www.inmotionhosting.com/vps-hosting",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "InMotion Hosting",
+      "title": "VPS 8 vCPU",
+      "price": "19.99",
+      "currency": "USD",
+      "offer_url": "https://www.inmotionhosting.com/vps-hosting",
+      "valid_until": "",
+      "source_url": "https://www.inmotionhosting.com/vps-hosting",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "InMotion Hosting",
+      "title": "VPS 12 vCPU",
+      "price": "31.99",
+      "currency": "USD",
+      "offer_url": "https://www.inmotionhosting.com/vps-hosting",
+      "valid_until": "",
+      "source_url": "https://www.inmotionhosting.com/vps-hosting",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    },
+    {
+      "provider": "InMotion Hosting",
+      "title": "VPS 16 vCPU",
+      "price": "39.99",
+      "currency": "USD",
+      "offer_url": "https://www.inmotionhosting.com/vps-hosting",
+      "valid_until": "",
+      "source_url": "https://www.inmotionhosting.com/vps-hosting",
+      "fetched_at": "2026-10-03T14:08:43Z",
+      "affiliate_url": ""
+    }
+  ]
+}
