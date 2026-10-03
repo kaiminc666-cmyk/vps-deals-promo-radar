@@ -1,5 +1,7 @@
 # vps-deals
 
+Main site: [vps-deals](https://vps-deals-promo-radar-2hi.pages.dev/)
+
 **Official-source VPS price watch. See the source.**
 
 The static site lists VPS providers and displays a price only when it can be read unambiguously from an official public source. It does not estimate discounts, renewals, or commissions. Provider source URLs, brand, niche, and the published base URL are configured in [.ilang/site.ilang](.ilang/site.ilang). The Python scraper and builder read that file directly.
