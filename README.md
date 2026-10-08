@@ -1,6 +1,6 @@
 # vps-deals
 
-Main site: [vps-deals](https://vps-deals-promo-radar-2hi.pages.dev/)
+Main site: [vps-deals](https://savecd.com/)
 
 **Official-source VPS price watch. See the source.**
 
@@ -15,7 +15,7 @@ python build.py
 
 The scraper follows each source domain's `robots.txt`, requests only the configured official page, and accepts only clearly structured official `Offer` data with a plan name, price, and currency. Ambiguous or expired offers are omitted. The static output is generated into `site/`.
 
-GitHub Actions runs every six hours and commits only when generated data or pages change. Cloudflare Pages should use build command `python build.py` and output directory `site`. After Cloudflare assigns the production URL, set `base_url` and `domain` in `.ilang/site.ilang` to that exact URL; this enables correct canonical tags and absolute sitemap URLs.
+GitHub Actions runs every six hours and commits only when generated data or pages change. Cloudflare Pages should use build command `python build.py` and output directory `site`. The production domain is configured as `base_url` and `domain` in `.ilang/site.ilang`; the builder uses it for canonical tags and absolute sitemap URLs.
 
 Affiliate links are intentionally blank until a real approved program URL is supplied. No commissions are asserted. GitHub is the first distribution channel; no social accounts are part of this first version.
 
