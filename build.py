@@ -61,6 +61,7 @@ def page(site, title, description, content, canonical="", jsonld=None):
     return Template((ROOT / "templates/page.html").read_text(encoding="utf-8")).substitute(
         title=esc(title), description=esc(description), canonical_tag=canonical_tag,
         brand=brand, canonical=esc(canonical), structured=structured, content=content,
+        contact_link=f'<a href="mailto:{esc(site.get("contact_email", ""))}">{esc(site.get("contact_email", ""))}</a>',
         og_image=esc(urljoin(site.get("base_url", "").rstrip("/") + "/", "assets/og.svg")))
 
 
@@ -75,6 +76,9 @@ def main():
     site, providers = config()
     brand = site.get("brand", "vps-deals")
     base = site.get("base_url", "").rstrip("/")
+    contact_email = site.get("contact_email", "").strip()
+    if not re.fullmatch(r"[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+", contact_email):
+        raise ValueError("Set a real contact_email in .ilang/site.ilang before building public pages")
     configured = {(p["name"], p["source"]) for p in providers}
     offers = [o for o in load_offers() if (o.get("provider"), o.get("source_url")) in configured]
     if OUT.exists():
@@ -133,7 +137,14 @@ def main():
     compare_content = f'<div class="crumb"><a href="/">Home</a> / Compare</div><section class="providerhero"><div class="kicker">Provider index</div><h1>Compare tracked sources</h1><p>Counts include only offers with a source-listed price. They are not rankings or recommendations.</p></section><div class="tablewrap"><table><thead><tr><th>Provider</th><th>Verified offers</th><th>Source</th></tr></thead><tbody>{compare}</tbody></table></div>'
     write(OUT / "compare.html", page(site, f"Compare VPS Providers | {brand}", "Compare tracked VPS providers by current source-listed prices and official source pages.", compare_content, base + "/compare.html" if base else "", {"@context":"https://schema.org","@type":"ItemList","itemListElement":cat_items}))
 
-    pages = [("", last_fetch), ("compare.html", last_fetch)] + provider_urls + [(f"/deals/{slugify(o['provider']+'-'+o['title'])}.html", o["fetched_at"][:10]) for o in offers]
+    about_content = '''<div class="crumb"><a href="/">Home</a> / About</div><section class="providerhero"><div class="kicker">About</div><h1>About this site</h1><p>vps-deals is an independently operated VPS price monitoring project, maintained by its site operator.</p></section><section class="detail"><h2>What we do</h2><p>We monitor VPS hosting offers and make it easier to compare the prices that providers publish on their own websites.</p><p>A price is shown only when it can be read from structured data on a provider's official public page. We do not invent prices, discounts, or renewal terms. When a price is missing, unclear, or expired, we leave it out and link readers to the provider's source so they can confirm current terms.</p><p>This site is an informational comparison resource. A listing is not a recommendation, and the provider's website controls its products, availability, and billing terms.</p></section>'''
+    privacy_content = '''<div class="crumb"><a href="/">Home</a> / Privacy</div><section class="providerhero"><div class="kicker">Privacy</div><h1>Privacy on this site</h1><p>This page explains the services used by vps-deals and what to expect when you follow a link away from this site.</p></section><section class="detail"><h2>Cloudflare analytics and delivery</h2><p>This site uses Cloudflare hosting and Web Analytics. Cloudflare's Web Analytics documentation says its performance beacon collects timing metrics to report page performance and that Cloudflare does not track individual end users across its customers' Internet properties. Cloudflare may also process technical request information as part of delivering and protecting website traffic. See <a href="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">Cloudflare's data collection documentation</a> and its <a href="https://www.cloudflare.com/privacypolicy/">privacy policy</a> for details.</p><h2>Third-party links, advertising, and affiliate links</h2><p>This site may display third-party advertisements and may include affiliate links. If you follow a link, the destination website operates under its own privacy policy and decides what information it collects. We do not control those sites or their data practices; review the destination's policy before sharing information there.</p><p>If you purchase through an affiliate link, the site may receive a commission at no extra cost to you. The link's destination may use its own cookies or other tracking tools under its own policy.</p><h2>Messages to the contact address</h2><p>If you email us, we receive the sender address and any information you include in your message so the site operator can read and respond to it. Do not include information you do not want to share by email.</p></section>'''
+    contact_content = f'''<div class="crumb"><a href="/">Home</a> / Contact</div><section class="providerhero"><div class="kicker">Contact</div><h1>Contact the site operator</h1><p>For questions about the site, its listed sources, or a correction, email <a href="mailto:{esc(contact_email)}">{esc(contact_email)}</a>.</p><p>Please include the page URL and enough detail for us to understand your request. Do not send payment details or passwords.</p></section>'''
+    write(OUT / "about.html", page(site, f"About | {brand}", "Who operates this independent VPS price monitoring site and how it handles source-listed offers.", about_content, base + "/about.html" if base else ""))
+    write(OUT / "privacy.html", page(site, f"Privacy | {brand}", "How vps-deals uses Cloudflare services and handles third-party and affiliate links.", privacy_content, base + "/privacy.html" if base else ""))
+    write(OUT / "contact.html", page(site, f"Contact | {brand}", "Contact the operator of vps-deals about the site or a listed source.", contact_content, base + "/contact.html" if base else ""))
+
+    pages = [("", last_fetch), ("compare.html", last_fetch), ("about.html", last_fetch), ("privacy.html", last_fetch), ("contact.html", last_fetch)] + provider_urls + [(f"/deals/{slugify(o['provider']+'-'+o['title'])}.html", o["fetched_at"][:10]) for o in offers]
     if base:
         sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{esc(base + '/' + path.lstrip('/'))}</loc>{("<lastmod>" + esc(lastmod) + "</lastmod>") if lastmod else ""}</url>" for path, lastmod in pages) + "</urlset>\n"
         (OUT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
